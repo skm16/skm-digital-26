@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F0EAE0">
+<meta name="color-scheme" content="light">
+
+<title>SKM.digital - Building cool sh*t. WordPress, Salesforce, custom tools.</title>
+<meta name="description" content="WordPress development and Salesforce integration for nonprofits, agencies, and mission-driven organizations. Independent studio in Woodbury, CT. 100+ projects launched.">
+<meta name="author" content="Sean Roberts">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://skm.digital/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skm.digital/">
+<meta property="og:site_name" content="SKM.digital">
+<meta property="og:title" content="SKM.digital - Building cool sh*t. WordPress, Salesforce, custom tools.">
+<meta property="og:description" content="WordPress development and Salesforce integration for nonprofits, agencies, and mission-driven organizations. Independent studio in Woodbury, CT. 100+ projects launched.">
+<meta property="og:image" content="https://skm.digital/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SKM.digital - Building cool sh*t. WordPress, Salesforce, custom tools. Independent studio in Woodbury, CT.">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SKM.digital - Building cool sh*t. WordPress, Salesforce, custom tools.">
+<meta name="twitter:description" content="WordPress development and Salesforce integration for nonprofits, agencies, and mission-driven organizations. Independent studio in Woodbury, CT. 100+ projects launched.">
+<meta name="twitter:image" content="https://skm.digital/og-image.png">
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Geist:wght@300..700&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXCKWE96S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZXCKWE96S');
+</script>
+
+<style>
+  :root {
+    --paper: #F0EAE0;
+    --paper-warm: #E6DECE;
+    --ink: #13100B;
+    --ink-soft: #473F33;
+    --ink-quiet: #857A6D;
+    --accent: #C8401F;
+    --accent-deep: #9E3218;
+    --accent-glow: rgba(200,64,31,0.12);
+    --green: #2C5F3A;
+    --rule: #C2B89F;
+    --available: #3A7D4C;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Geist', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Paper grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.28;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.07 0 0 0 0 0.06 0 0 0 0 0.04 0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    z-index:-1;
+  }
+
+  .container {
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 3rem);
+  }
+
+  /* ─────────── GHOST TEXT ─────────── */
+  .ghost-text {
+    position: absolute;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+    opacity: 0.07;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+  }
+  .hero { position: relative; }
+  .hero .ghost-text {
+    font-size: clamp(10rem, 22vw, 22rem);
+    bottom: -0.1em;
+    right: -0.05em;
+    opacity: 0.06;
+  }
+  .work { position: relative; }
+  .work .ghost-text {
+    font-size: clamp(8rem, 18vw, 18rem);
+    top: 2rem;
+    right: -0.05em;
+    opacity: 0.055;
+  }
+  .what { position: relative; }
+  .what .ghost-text {
+    font-size: clamp(8rem, 16vw, 16rem);
+    bottom: -0.15em;
+    left: -0.05em;
+    opacity: 0.065;
+  }
+  .clients { position: relative; }
+  .clients .ghost-text {
+    font-size: clamp(8rem, 16vw, 16rem);
+    top: 1rem;
+    right: -0.05em;
+    opacity: 0.055;
+  }
+
+  /* ─────────── SCROLL REVEAL ─────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─────────── NAV ─────────── */
+  nav.top {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    background: rgba(240, 234, 224, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+  }
+  nav.top .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    font-variation-settings: "SOFT" 50;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .wordmark .dot { color: var(--accent); }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--available);
+    background: rgba(58,125,76,0.1);
+    border: 1px solid rgba(58,125,76,0.25);
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--available);
+    border-radius: 50%;
+    animation: pulse-dot 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  nav.top ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  nav.top a {
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s;
+  }
+  nav.top a:hover { color: var(--accent); }
+  nav.top ul a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  nav.top ul a:hover::after { width: 100%; }
+
+  .nav-socials {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .nav-socials a {
+    color: var(--ink-quiet);
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+  }
+  .nav-socials a:hover { color: var(--ink); }
+  .nav-socials svg { width: 16px; height: 16px; }
+
+  /* ─────────── HERO ─────────── */
+  .hero {
+    padding: clamp(4.5rem, 13vh, 10rem) 0 clamp(3rem, 8vh, 6rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--ink-quiet);
+    margin-bottom: 2.75rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s ease-out forwards;
+  }
+  .hero-meta .dash {
+    width: 28px;
+    height: 1px;
+    background: var(--rule);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(3.25rem, 9.5vw, 9rem);
+    line-height: 0.93;
+    letter-spacing: -0.038em;
+    font-variation-settings: "opsz" 144, "SOFT" 25;
+    max-width: 14ch;
+    margin-bottom: 3.5rem;
+  }
+  .hero h1 .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: heroReveal 0.9s ease-out forwards;
+  }
+  .hero h1 .word:nth-child(1) { animation-delay: 0.15s; }
+  .hero h1 .word:nth-child(2) { animation-delay: 0.25s; }
+  .hero h1 .word:nth-child(3) { animation-delay: 0.35s; font-style: italic; font-weight: 300; }
+  .hero h1 .word:nth-child(4) { animation-delay: 0.45s; }
+  .hero h1 .word:nth-child(5) { animation-delay: 0.55s; }
+  .hero h1 .word:nth-child(6) { animation-delay: 0.65s; }
+  .hero h1 .word:nth-child(7) { animation-delay: 0.75s; }
+  .hero h1 .word:nth-child(8) { animation-delay: 0.85s; }
+
+  .star {
+    color: var(--accent);
+    display: inline-block;
+    font-style: normal;
+    animation: spin 16s linear infinite;
+    transform-origin: center 60%;
+  }
+
+  .hero-sub {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: end;
+    border-top: 1px solid var(--rule);
+    padding-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 1.05s ease-out forwards;
+  }
+  .hero-sub p {
+    font-family: 'Fraunces', serif;
+    font-weight: 350;
+    font-size: clamp(1.05rem, 1.5vw, 1.5rem);
+    line-height: 1.5;
+    max-width: 54ch;
+    color: var(--ink-soft);
+    font-variation-settings: "opsz" 14, "SOFT" 50;
+  }
+  .hero-sub p em {
+    font-style: italic;
+    color: var(--ink);
+  }
+  .hero-cta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    padding: 1rem 1.75rem;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .hero-cta:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--paper);
+  }
+  .hero-cta .arrow { transition: transform 0.3s; }
+  .hero-cta:hover .arrow { transform: translateX(5px); }
+
+  /* ─────────── MARQUEE ─────────── */
+  .marquee {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 1.1rem 0;
+    overflow: hidden;
+    background: var(--paper-warm);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: scroll 55s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+  .marquee-item::after {
+    content: '✦';
+    color: var(--accent);
+    font-style: normal;
+    font-size: 0.7em;
+  }
+
+  /* ─────────── WORK ─────────── */
+  .work {
+    padding: clamp(5rem, 12vh, 9rem) 0 clamp(4rem, 8vh, 6rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-quiet);
+    margin-bottom: 2.5rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 5rem;
+  }
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 100, "SOFT" 35;
+  }
+  .section-head h2 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+  .section-head p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 44ch;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2.5rem 2rem;
+  }
+  .project {
+    grid-column: span 6;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+    cursor: pointer;
+  }
+  .project:nth-child(1) { grid-column: span 7; }
+  .project:nth-child(2) { grid-column: span 5; }
+  .project:nth-child(3) { grid-column: span 5; }
+  .project:nth-child(4) { grid-column: span 7; }
+
+  .project-thumb {
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+  }
+  .project:hover .project-thumb {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 48px rgba(19,16,11,0.16);
+  }
+
+  /* Real screenshot thumbs — browser preview style */
+  .thumb-screen {
+    background: #ffffff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    isolation: isolate;
+  }
+  .thumb-chrome {
+    background: #E8E4DE;
+    padding: 0.45rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .thumb-chrome .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #C8C0B8;
+  }
+  .thumb-chrome .dot:nth-child(1) { background: #FF6058; }
+  .thumb-chrome .dot:nth-child(2) { background: #FFBD2E; }
+  .thumb-chrome .dot:nth-child(3) { background: #28CA41; }
+  .thumb-chrome .bar {
+    flex: 1;
+    height: 18px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+    margin: 0 0.5rem;
+  }
+  .thumb-screen-img {
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: #ffffff;
+  }
+  .thumb-screen img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    /* Skip the site nav bar, show the hero content */
+    object-position: center 10%;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .project:hover .thumb-screen img {
+    transform: scale(1.025);
+  }
+
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+    margin-bottom: 0.45rem;
+  }
+  .project-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+  }
+  .project:hover .project-name { color: var(--accent); }
+  .project-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-quiet);
+  }
+  .project-desc {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    max-width: 50ch;
+  }
+  .project-tags {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .project-tags span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.67rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-quiet);
+  }
+  .project-tags span:not(:last-child)::after {
+    content: ' / ';
+    margin-left: 0.45rem;
+  }
+
+  /* ─────────── WHAT I DO ─────────── */
+  .what {
+    padding: clamp(5rem, 10vh, 8rem) 0;
+    border-top: 1px solid var(--rule);
+    background: var(--paper-warm);
+    position: relative;
+    overflow: hidden;
+  }
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .what-grid h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 72, "SOFT" 35;
+    position: sticky;
+    top: 5rem;
+  }
+  .what-grid h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .what-prose p {
+    font-family: 'Fraunces', serif;
+    font-weight: 350;
+    font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 1.75rem;
+    font-variation-settings: "opsz" 24, "SOFT" 50;
+  }
+  .what-prose p:last-child { margin-bottom: 0; color: var(--ink-soft); }
+  .what-prose strong {
+    font-weight: 500;
+    color: var(--ink);
+    background: linear-gradient(to top, rgba(200,64,31,0.15) 35%, transparent 35%);
+    padding: 0 0.1em;
+  }
+
+  /* ─────────── CLIENTS ─────────── */
+  .clients {
+    padding: clamp(5rem, 10vh, 8rem) 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+  .clients-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .clients-sticky {
+    position: sticky;
+    top: 5rem;
+  }
+  .clients h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 72, "SOFT" 35;
+    margin-bottom: 1.5rem;
+  }
+  .clients h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .clients-aside-head {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    max-width: 36ch;
+  }
+  .clients-list { display: grid; gap: 0; }
+  .clients-sublabel {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.67rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-quiet);
+    padding-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .clients-sublabel::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .clients-sublabel.spaced { margin-top: 2.75rem; }
+  .clients-aside {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    padding: 0.75rem 0 1rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--rule);
+    max-width: 52ch;
+  }
+  .client-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    transition: padding-left 0.25s ease;
+  }
+  .client-row:hover { padding-left: 0.75rem; }
+  .client-row:hover .client-name { color: var(--accent); }
+  .client-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+    transition: color 0.25s;
+  }
+  .client-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-quiet);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .clients-note {
+    margin-top: 2.25rem;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  /* ─────────── KISHO ─────────── */
+  .kisho {
+    padding: clamp(5rem, 10vh, 8rem) 0;
+    background: #0C1A18;
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .kisho::before {
+    content: '';
+    position: absolute;
+    top: -160px;
+    right: -160px;
+    width: 560px;
+    height: 560px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(42,157,143,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .kisho::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(42,157,143,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .kisho-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .kisho .k-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #2A9D8F;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .kisho .k-label::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: #2A9D8F;
+  }
+  .kisho h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-variation-settings: "opsz" 72, "SOFT" 30;
+    margin-bottom: 1.5rem;
+  }
+  .kisho h2 em {
+    font-style: italic;
+    color: #2A9D8F;
+  }
+  .kisho p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: rgba(240,234,224,0.7);
+    margin-bottom: 2rem;
+    max-width: 48ch;
+  }
+  .kisho-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(42,157,143,0.6);
+    padding-bottom: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: gap 0.3s, border-color 0.3s;
+  }
+  .kisho-link:hover { gap: 1.1rem; border-color: #2A9D8F; }
+
+  /* Kisho brand typography */
+  .kisho-brand {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #2A9D8F;
+  }
+
+  /* Kisho visual — scrolling screenshot */
+  .kisho-visual {
+    position: relative;
+    border: 1px solid rgba(42,157,143,0.2);
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(42,157,143,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 420px;
+    isolation: isolate;
+  }
+  /* Browser chrome for Kisho */
+  .kisho-visual .k-chrome {
+    background: #0F1F1D;
+    padding: 0.5rem 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1px solid rgba(42,157,143,0.15);
+    flex-shrink: 0;
+    z-index: 2;
+  }
+  .kisho-visual .k-chrome .k-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .kisho-visual .k-chrome .k-dot:nth-child(1) { background: #FF6058; }
+  .kisho-visual .k-chrome .k-dot:nth-child(2) { background: #FFBD2E; }
+  .kisho-visual .k-chrome .k-dot:nth-child(3) { background: #28CA41; }
+  .kisho-visual .k-chrome .k-bar {
+    flex: 1;
+    height: 18px;
+    background: rgba(42,157,143,0.12);
+    border-radius: 3px;
+    margin: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: rgba(42,157,143,0.5);
+    letter-spacing: 0.05em;
+  }
+  .kisho-visual .k-img-wrap {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+  /* Fade out at bottom */
+  .kisho-visual .k-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, #0C1A18);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .kisho-visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Auto-scroll animation — slowly drifts down */
+    animation: kisho-scroll 18s ease-in-out infinite alternate;
+  }
+  @keyframes kisho-scroll {
+    from { transform: translateY(0); }
+    to   { transform: translateY(calc(-100% + 390px)); }
+  }
+  .kisho-visual:hover img {
+    animation-play-state: paused;
+  }
+
+  /* ─────────── CONTACT ─────────── */
+  .contact {
+    padding: clamp(6rem, 14vh, 10rem) 0 clamp(4rem, 8vh, 6rem);
+    text-align: center;
+    position: relative;
+  }
+  .contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 5rem;
+    background: linear-gradient(to bottom, transparent, var(--rule));
+  }
+  .contact h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(2.5rem, 7vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    margin-bottom: 2.25rem;
+    font-variation-settings: "opsz" 144, "SOFT" 25;
+  }
+  .contact h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .contact-email {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.5rem, 3vw, 2.75rem);
+    font-weight: 400;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    transition: color 0.3s, border-color 0.3s;
+    letter-spacing: -0.01em;
+  }
+  .contact-email:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .contact-note {
+    margin-top: 2.5rem;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink-quiet);
+    max-width: 38ch;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.55;
+    font-size: 0.95rem;
+  }
+
+  /* ─────────── FOOTER ─────────── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.75rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--ink-quiet);
+  }
+  footer .container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    justify-content: center;
+  }
+  .footer-socials a {
+    color: var(--ink-quiet);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .footer-socials a:hover { color: var(--ink); }
+  .footer-socials svg { width: 14px; height: 14px; }
+  footer .right { text-align: right; }
+
+  /* ─────────── ANIMATIONS ─────────── */
+  @keyframes heroReveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─────────── RESPONSIVE ─────────── */
+  @media (max-width: 960px) {
+    .hero-sub { grid-template-columns: 1fr; gap: 2rem; }
+    .section-head { grid-template-columns: 1fr; gap: 2rem; }
+    .work-grid .project,
+    .work-grid .project:nth-child(1),
+    .work-grid .project:nth-child(2),
+    .work-grid .project:nth-child(3),
+    .work-grid .project:nth-child(4) { grid-column: span 12; }
+    .what-grid, .clients-grid, .kisho-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .what-grid h2, .clients-sticky { position: static; }
+    nav.top ul { gap: 1.5rem; }
+    .status-pill { display: none; }
+    footer .container { grid-template-columns: 1fr; text-align: center; gap: 0.75rem; }
+    footer .right { text-align: center; }
+    .footer-socials { justify-content: center; }
+  }
+  @media (max-width: 640px) {
+    .nav-socials { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="container">
+    <div class="nav-left">
+      <a href="#" class="wordmark">SKM<span class="dot">.</span>digital</a>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>Available for projects</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-socials">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/seanmroberts/" title="LinkedIn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <!-- GitHub -->
+        <a href="https://github.com/skm16/" title="GitHub" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="ghost-text" aria-hidden="true">SKM</span>
+  <div class="container">
+    <div class="hero-meta">
+      <span>Independent Studio</span>
+      <span class="dash"></span>
+      <span>20+ Years</span>
+      <span class="dash"></span>
+      <span>100+ Launches</span>
+    </div>
+    <h1>
+      <span class="word">Building</span>
+      <span class="word">cool</span>
+      <span class="word">sh<span class="star">*</span>t</span>
+      <span class="word">for</span>
+      <span class="word">people</span>
+      <span class="word">doing</span>
+      <span class="word">good</span>
+      <span class="word">work.</span>
+    </h1>
+    <div class="hero-sub">
+      <p>SKM.digital is an independent studio building <em>web platforms, integrations, and custom tools</em> for nonprofits, mission-driven companies, and the occasional brewery. Two decades in. One hundred-plus projects out the door.</p>
+      <a href="#contact" class="hero-cta">
+        <span>Start a project</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">WordPress that doesn't break</span>
+    <span class="marquee-item">Salesforce that actually syncs</span>
+    <span class="marquee-item">Custom tools when off-the-shelf won't cut it</span>
+    <span class="marquee-item">Portals, registries, integrations</span>
+    <span class="marquee-item">No account managers</span>
+    <span class="marquee-item">No handoffs</span>
+    <span class="marquee-item">WordPress that doesn't break</span>
+    <span class="marquee-item">Salesforce that actually syncs</span>
+    <span class="marquee-item">Custom tools when off-the-shelf won't cut it</span>
+    <span class="marquee-item">Portals, registries, integrations</span>
+    <span class="marquee-item">No account managers</span>
+    <span class="marquee-item">No handoffs</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <span class="ghost-text" aria-hidden="true">Work</span>
+  <div class="container">
+    <div class="section-label reveal"><span>Selected Work — 2018 / 2026</span></div>
+    <div class="section-head reveal">
+      <h2>A few things <em>I'm proud of</em>.</h2>
+      <p>Work spans rare disease platforms, breweries, government portals, and institutional websites. The connecting thread is that someone good was trying to do something hard.</p>
+    </div>
+
+    <div class="work-grid">
+
+      <a href="#" class="project reveal">
+        <div class="project-thumb thumb-screen">
+          <div class="thumb-chrome">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <div class="bar"></div>
+          </div>
+          <div class="thumb-screen-img">
+            <img src="/images/two-roads.webp" alt="Two Roads Brewing website screenshot" width="1800" height="983" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-name">Two Roads Brewing</span>
+          <span class="project-year">2024 — Ongoing</span>
+        </div>
+        <p class="project-desc">Brand site rebuild and ongoing retainer for a Connecticut craft brewery with national distribution.</p>
+        <div class="project-tags">
+          <span>WordPress</span><span>E-commerce</span><span>Retainer</span>
+        </div>
+      </a>
+
+      <a href="#" class="project reveal" style="transition-delay: 0.1s">
+        <div class="project-thumb thumb-screen">
+          <div class="thumb-chrome">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <div class="bar"></div>
+          </div>
+          <div class="thumb-screen-img">
+            <img src="/images/kisho-marketing.webp" alt="KISHO platform screenshot" width="1800" height="983" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-name"><span class="kisho-brand" style="font-size:1rem">KISHO</span></span>
+          <span class="project-year">2025 — Present</span>
+        </div>
+        <p class="project-desc">Rare disease intelligence platform. 35,000+ programmatic pages built on a MONDO ontology backbone. My long bet.</p>
+        <div class="project-tags">
+          <span>Next.js</span><span>Postgres</span><span>Product</span>
+        </div>
+      </a>
+
+      <a href="#" class="project reveal" style="transition-delay: 0.05s">
+        <div class="project-thumb thumb-screen">
+          <div class="thumb-chrome">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <div class="bar"></div>
+          </div>
+          <div class="thumb-screen-img">
+            <img src="/images/blackbird-presents.webp" alt="Blackbird Presents website screenshot" width="1800" height="983" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-name">Blackbird Presents</span>
+          <span class="project-year">2023 — Ongoing</span>
+        </div>
+        <p class="project-desc">Concert promoter and festival brand site for Willie Nelson's Outlaw Music Festival and other major touring productions.</p>
+        <div class="project-tags">
+          <span>WordPress</span><span>Music &amp; Events</span>
+        </div>
+      </a>
+
+      <a href="#" class="project reveal" style="transition-delay: 0.15s">
+        <div class="project-thumb thumb-screen">
+          <div class="thumb-chrome">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <div class="bar"></div>
+          </div>
+          <div class="thumb-screen-img">
+            <img src="/images/nmda-portal.webp" alt="NM Department of Agriculture portal screenshot" width="1800" height="1200" loading="lazy" decoding="async">
+          </div>
+        </div>
+        <div class="project-meta">
+          <span class="project-name">NM Department of Agriculture</span>
+          <span class="project-year">2024</span>
+        </div>
+        <p class="project-desc">Custom CSR &amp; logo program submission portal for state-regulated agricultural producers.</p>
+        <div class="project-tags">
+          <span>Custom Web App</span><span>Government</span><span>Workflow</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I DO -->
+<section class="what" id="about">
+  <span class="ghost-text" aria-hidden="true">About</span>
+  <div class="container">
+    <div class="section-label reveal"><span>What I Do</span></div>
+    <div class="what-grid">
+      <h2 class="reveal">Three <em>buckets</em>, one operator.</h2>
+      <div class="what-prose reveal" style="transition-delay: 0.1s">
+        <p>Most of my work falls into three buckets: <strong>WordPress builds</strong> for orgs that need them done right, <strong>Salesforce integrations</strong> that actually sync, and <strong>custom tools</strong> when the off-the-shelf thing doesn't fit.</p>
+        <p>I work directly. No account managers, no project managers, no handoffs. You talk to the person building the thing — which means decisions get made faster, scope stays honest, and the work shows up the way it was supposed to.</p>
+        <p>Some of that direct work is with clients. Some of it is embedded with web and marketing agencies as senior dev capacity — white-label or co-branded, project-based or ongoing. Either way, the engagement is designed around the work, not the org chart.</p>
+        <p>Two decades in. One hundred-plus custom sites and tools launched. Seven of those years at the National Organization for Rare Disorders, building RareDiseases.org and twenty patient registry microsites. The rest spent building for everyone from craft breweries to state governments to international institutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients">
+  <span class="ghost-text" aria-hidden="true">Clients</span>
+  <div class="container">
+    <div class="section-label reveal"><span>Currently Working With</span></div>
+    <div class="clients-grid">
+      <div class="clients-sticky">
+        <h2 class="reveal">Real <em>people</em>, real work.</h2>
+        <p class="clients-aside-head reveal" style="transition-delay:0.1s; margin-top: 1.25rem;">Direct relationships and embedded agency partnerships. Two kinds of work, one set of hands.</p>
+      </div>
+      <div class="clients-list reveal" style="transition-delay: 0.15s">
+        <div class="clients-sublabel"><span>Direct Clients</span></div>
+        <div class="client-row">
+          <span class="client-name">Two Roads Brewing</span>
+          <span class="client-meta">Retainer — 2024</span>
+        </div>
+        <div class="client-row">
+          <span class="client-name">NYIAC</span>
+          <span class="client-meta">International Arbitration</span>
+        </div>
+        <div class="client-row">
+          <span class="client-name">Blue Bear Music</span>
+          <span class="client-meta">Music Education</span>
+        </div>
+        <div class="client-row">
+          <span class="client-name">NM Dept. of Agriculture</span>
+          <span class="client-meta">State Government</span>
+        </div>
+        <div class="client-row">
+          <span class="client-name">Blackbird Presents</span>
+          <span class="client-meta">Music &amp; Live Events</span>
+        </div>
+
+        <div class="clients-sublabel spaced"><span>Agency Partnerships</span></div>
+        <p class="clients-aside">Embedded development capacity for web and marketing agencies that need senior dev without the headcount. White-label or co-branded — your name on the work, my hands on the keyboard.</p>
+        <div class="client-row">
+          <span class="client-name">McKracken Agency</span>
+          <span class="client-meta">White-label Development</span>
+        </div>
+        <div class="client-row">
+          <span class="client-name">Label Interactive</span>
+          <span class="client-meta">White-label Development</span>
+        </div>
+        <div class="client-row">
+          <span class="client-name">BCS Interactive</span>
+          <span class="client-meta">White-label Development</span>
+        </div>
+
+        <p class="clients-note">Plus a long tail of past work spanning two decades — agencies, foundations, registries, and the occasional founder with an idea worth building.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KISHO -->
+<section class="kisho">
+  <div class="container">
+    <div class="kisho-inner">
+      <div class="reveal">
+        <div class="k-label">The Long Bet</div>
+        <h2>I'm also building <span class="kisho-brand">Kisho</span> — a platform for the rare disease community.</h2>
+        <p>It's how I keep one foot in the work that started this. A way for individuals and organizations to track data about their disease, stay informed, drive research, and make something hard a little easier.</p>
+        <a href="https://kishomed.io" class="kisho-link" target="_blank" rel="noopener">
+          <span>Visit kishomed.io</span>
+          <span>→</span>
+        </a>
+      </div>
+      <div class="kisho-visual reveal" style="transition-delay: 0.15s; display:flex; flex-direction:column;">
+        <div class="k-chrome">
+          <span class="k-dot"></span><span class="k-dot"></span><span class="k-dot"></span>
+          <div class="k-bar">kishomed.io/dashboard</div>
+        </div>
+        <div class="k-img-wrap">
+          <img src="/images/kisho-dashboard.webp" alt="KISHO dashboard - rare disease intelligence" width="1800" height="1884" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <h2 class="reveal">Got something <em>interesting</em>?</h2>
+    <a href="mailto:sean@skm.digital" class="contact-email reveal" style="transition-delay: 0.1s">sean@skm.digital</a>
+    <p class="contact-note reveal" style="transition-delay: 0.2s">Tell me what you're trying to build. If it's a fit, we'll figure out the rest.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div>SKM.digital — Woodbury, CT</div>
+    <div class="footer-socials">
+      <a href="https://www.linkedin.com/in/seanmroberts/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/skm16/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+    <div class="right">© 2026 — Built by hand</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<!-- Structured data: Person + ProfessionalService + WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://skm.digital/#sean-roberts",
+      "name": "Sean Roberts",
+      "url": "https://skm.digital/",
+      "jobTitle": "Founder, Web Developer",
+      "worksFor": { "@id": "https://skm.digital/#org" },
+      "sameAs": [
+        "https://www.linkedin.com/in/seanmroberts/",
+        "https://github.com/skm16/"
+      ],
+      "knowsAbout": [
+        "WordPress development",
+        "Salesforce integration",
+        "Custom web applications",
+        "Member portals",
+        "Nonprofit technology"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://skm.digital/#org",
+      "name": "SKM.digital",
+      "alternateName": "SKM Digital",
+      "url": "https://skm.digital/",
+      "logo": "https://skm.digital/og-image.png",
+      "image": "https://skm.digital/og-image.png",
+      "description": "Independent studio building web platforms, integrations, and custom tools for nonprofits, mission-driven companies, and agency partners. WordPress, Salesforce, and custom web applications.",
+      "founder": { "@id": "https://skm.digital/#sean-roberts" },
+      "founderName": "Sean Roberts",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Woodbury",
+        "addressRegion": "CT",
+        "postalCode": "06798",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Connecticut" },
+        { "@type": "Country", "name": "United States" }
+      ],
+      "serviceType": [
+        "WordPress Development",
+        "Salesforce Integration",
+        "Custom Web Application Development",
+        "Member Portal Development",
+        "Nonprofit Technology Consulting"
+      ],
+      "knowsAbout": [
+        "WordPress",
+        "Salesforce",
+        "Web development",
+        "Member portals",
+        "Nonprofit technology"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/seanmroberts/",
+        "https://github.com/skm16/"
+      ],
+      "email": "sean@skm.digital",
+      "priceRange": "$$"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://skm.digital/#website",
+      "url": "https://skm.digital/",
+      "name": "SKM.digital",
+      "description": "WordPress development and Salesforce integration for nonprofits, agencies, and mission-driven organizations.",
+      "publisher": { "@id": "https://skm.digital/#org" },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+
+</body>
+</html>
