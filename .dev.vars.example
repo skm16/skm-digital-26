@@ -5,4 +5,6 @@ RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 CONTACT_FROM_EMAIL="SKM.digital <contact@skm.digital>"
 CONTACT_TO_EMAIL=sean@skm.digital
 TURNSTILE_SECRET_KEY=0x4AAAAAAA_secret_key
-PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAAA_site_key
+# PUBLIC_TURNSTILE_SITE_KEY is hardcoded in src/components/ContactForm.astro.
+# Override only if you rotate the widget.
+# PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAAA_site_key

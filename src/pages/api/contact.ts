@@ -81,6 +81,26 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
   const parsed = ContactSchema.safeParse(raw);
   if (!parsed.success) {
+    const issues = parsed.error.issues;
+    const missingTurnstile = issues.some((i) => i.path[0] === 'cf-turnstile-response');
+    const invalidEmail = issues.some(
+      (i) => i.path[0] === 'email' && i.code !== 'too_small',
+    );
+    console.warn('contact: validation failed', {
+      issues: issues.map((i) => ({ path: i.path, code: i.code })),
+    });
+    if (missingTurnstile) {
+      return jsonResponse(
+        {
+          ok: false,
+          error: 'Captcha did not load. Refresh the page and try again.',
+        },
+        400,
+      );
+    }
+    if (invalidEmail) {
+      return jsonResponse({ ok: false, error: 'That email address looks invalid.' }, 400);
+    }
     return jsonResponse({ ok: false, error: 'Please fill in all required fields.' }, 400);
   }
 
@@ -96,6 +116,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     env.TURNSTILE_SECRET_KEY,
   );
   if (!turnstileOk) {
+    console.warn('contact: turnstile siteverify rejected token');
     return jsonResponse(
       { ok: false, error: 'Captcha verification failed. Please try again.' },
       400,
@@ -142,13 +163,14 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   });
 
   if (error) {
-    console.error('Resend send failed:', error);
+    console.error('contact: resend send failed', error);
     return jsonResponse(
       { ok: false, error: 'Could not send the message. Please try again or email me directly.' },
       502,
     );
   }
 
+  console.log('contact: delivered', { project_type, email });
   return jsonResponse({ ok: true });
 };
 

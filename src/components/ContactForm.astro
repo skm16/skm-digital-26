@@ -1,5 +1,9 @@
 ---
-const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+// Turnstile site keys are public by design (they're embedded in HTML).
+// Hardcoded so the build doesn't depend on the dashboard env-var setup, which
+// differs between Cloudflare Pages and Workers Builds. Override via env var if
+// you ever rotate the widget.
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAADH1M1M-jQdgIlOM';
 ---
 
 <div class="contact-form-wrap">
