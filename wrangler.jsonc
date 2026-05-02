@@ -16,5 +16,13 @@
   },
   "observability": {
     "enabled": true
+  },
+  // Non-sensitive runtime config. Wrangler treats this file as the source of
+  // truth and will REMOVE any plaintext vars set in the dashboard but not
+  // declared here on every deploy. Secrets (RESEND_API_KEY,
+  // TURNSTILE_SECRET_KEY) are stored separately and preserved automatically.
+  "vars": {
+    "CONTACT_FROM_EMAIL": "SKM.digital <sean@skm.digital>",
+    "CONTACT_TO_EMAIL": "sean@skm.digital"
   }
 }

@@ -51,9 +51,17 @@ is the Worker entry that handles `/api/contact`.
      (the default `npx wrangler deploy` skips the Astro build — that's what causes the
      "Asset too large / 118 MiB workerd" error, because Wrangler tries to upload `node_modules` as static assets.)
    - **Build command:** leave blank (the deploy script handles it).
-2. **Settings → Variables and Secrets**
-   - **Plaintext / build-time:** `PUBLIC_TURNSTILE_SITE_KEY`
-   - **Secret / runtime:** `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`
+2. **Settings → Variables and Secrets** — secrets only:
+   - `RESEND_API_KEY`
+   - `TURNSTILE_SECRET_KEY`
+
+   The non-sensitive vars (`CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`) are declared in
+   [`wrangler.jsonc`](./wrangler.jsonc) and travel with the repo. Don't add them to the
+   dashboard — wrangler treats the config file as the source of truth and will
+   *remove* any dashboard-set plaintext vars not declared in `wrangler.jsonc` on each deploy.
+
+   The Turnstile site key is hardcoded in [`src/components/ContactForm.astro`](./src/components/ContactForm.astro)
+   (site keys are public — they appear verbatim in the rendered HTML).
 3. **Settings → Domains & Routes:** add `skm.digital` and `www.skm.digital`.
 
 ### Deploy from your laptop (optional)
