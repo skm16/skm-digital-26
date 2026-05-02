@@ -1,16 +1,16 @@
 /**
- * Image optimizer for /images
+ * Image optimizer for /public/images
  *
  * Resizes each PNG to a max width of 1800px (still 2x for retina) and writes
  * a WebP at quality 82. Originals are left untouched - run `npm run images`
- * after dropping new screenshots into /images.
+ * after dropping new screenshots into /public/images.
  */
 
 import { readdir, stat } from 'node:fs/promises';
 import { join, parse } from 'node:path';
 import sharp from 'sharp';
 
-const IMAGES_DIR = new URL('../images/', import.meta.url).pathname.replace(/^\//, '');
+const IMAGES_DIR = new URL('../public/images/', import.meta.url).pathname.replace(/^\//, '');
 const MAX_WIDTH = 1800;
 const WEBP_QUALITY = 82;
 

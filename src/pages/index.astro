@@ -1,3 +1,6 @@
+---
+import ContactForm from '../components/ContactForm.astro';
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,14 +46,14 @@
 
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXCKWE96S"></script>
-<script>
+<script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-ZZXCKWE96S');
 </script>
 
-<style>
+<style is:global>
   :root {
     --paper: #F0EAE0;
     --paper-warm: #E6DECE;
@@ -919,39 +922,170 @@
     font-size: clamp(2.5rem, 7vw, 6.5rem);
     line-height: 1;
     letter-spacing: -0.035em;
-    margin-bottom: 2.25rem;
+    margin-bottom: 1.5rem;
     font-variation-settings: "opsz" 144, "SOFT" 25;
   }
   .contact h2 em {
     font-style: italic;
     color: var(--accent);
   }
-  .contact-email {
+  .contact-lead {
     font-family: 'Fraunces', serif;
-    font-size: clamp(1.5rem, 3vw, 2.75rem);
-    font-weight: 400;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 0.5rem;
-    display: inline-block;
-    transition: color 0.3s, border-color 0.3s;
-    letter-spacing: -0.01em;
+    font-style: italic;
+    color: var(--ink-soft);
+    max-width: 44ch;
+    margin: 0 auto 3rem;
+    line-height: 1.55;
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
   }
-  .contact-email:hover {
+
+  /* ─────────── CONTACT FORM ─────────── */
+  .contact-form-wrap {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .contact-form {
+    display: block;
+  }
+  .field {
+    margin-bottom: 1.5rem;
+  }
+  .field label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-quiet);
+    margin-bottom: 0.55rem;
+  }
+  .field label .req {
     color: var(--accent);
-    border-color: var(--accent);
+    margin-left: 0.15em;
   }
-  .contact-note {
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    font-family: 'Geist', -apple-system, sans-serif;
+    font-size: 1rem;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid var(--rule);
+    border-radius: 0;
+    padding: 0.85rem 1rem;
+    line-height: 1.4;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .field select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%23857A6D' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--ink);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.55;
+    font-family: 'Geist', -apple-system, sans-serif;
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .honey-pot {
+    position: absolute;
+    left: -10000px;
+    top: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .cf-turnstile-wrap {
+    margin: 1.5rem 0 1.75rem;
+    min-height: 65px;
+  }
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .form-submit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 1rem 1.75rem;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.2s ease;
+  }
+  .form-submit:hover:not([disabled]) {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--paper);
+  }
+  .form-submit[disabled] {
+    opacity: 0.5;
+    cursor: progress;
+  }
+  .form-submit .arrow { transition: transform 0.3s; }
+  .form-submit:hover:not([disabled]) .arrow { transform: translateX(5px); }
+
+  .form-error-inline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  .form-status {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    font-style: italic;
+    color: var(--ink);
+    text-align: center;
+    padding: 3rem 0;
+    line-height: 1.55;
+  }
+  .form-status.success {
+    color: var(--green);
+  }
+
+  .form-fallback {
     margin-top: 2.5rem;
+    text-align: center;
     font-family: 'Fraunces', serif;
     font-style: italic;
     color: var(--ink-quiet);
-    max-width: 38ch;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.55;
     font-size: 0.95rem;
+  }
+  .form-fallback strong {
+    font-style: normal;
+    color: var(--ink-soft);
+    font-family: 'Geist', -apple-system, sans-serif;
+    font-weight: 500;
   }
 
   /* ─────────── FOOTER ─────────── */
@@ -1024,6 +1158,7 @@
   }
   @media (max-width: 640px) {
     .nav-socials { display: none; }
+    .field-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1140,7 +1275,7 @@
           <span class="project-name">Two Roads Brewing</span>
           <span class="project-year">2024 — Ongoing</span>
         </div>
-        <p class="project-desc">Brand site rebuild and ongoing retainer for a Connecticut craft brewery with national distribution.</p>
+        <p class="project-desc">Trusted WordPress development partner for Connecticut craft brewery with national distribution.</p>
         <div class="project-tags">
           <span>WordPress</span><span>E-commerce</span><span>Retainer</span>
         </div>
@@ -1180,7 +1315,7 @@
           <span class="project-name">Blackbird Presents</span>
           <span class="project-year">2023 — Ongoing</span>
         </div>
-        <p class="project-desc">Concert promoter and festival brand site for Willie Nelson's Outlaw Music Festival and other major touring productions.</p>
+        <p class="project-desc">Live event production house, concert promoter and festival brand site for Outlaw Music Festival featuring Willie Nelson and other major touring productions.</p>
         <div class="project-tags">
           <span>WordPress</span><span>Music &amp; Events</span>
         </div>
@@ -1311,8 +1446,8 @@
 <section class="contact" id="contact">
   <div class="container">
     <h2 class="reveal">Got something <em>interesting</em>?</h2>
-    <a href="mailto:sean@skm.digital" class="contact-email reveal" style="transition-delay: 0.1s">sean@skm.digital</a>
-    <p class="contact-note reveal" style="transition-delay: 0.2s">Tell me what you're trying to build. If it's a fit, we'll figure out the rest.</p>
+    <p class="contact-lead reveal" style="transition-delay: 0.1s">Tell me what you're trying to build. If it's a fit, we'll figure out the rest.</p>
+    <ContactForm />
   </div>
 </section>
 
@@ -1340,7 +1475,7 @@
   </div>
 </footer>
 
-<script>
+<script is:inline>
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1355,8 +1490,7 @@
 </script>
 
 <!-- Structured data: Person + ProfessionalService + WebSite -->
-<script type="application/ld+json">
-{
+<script type="application/ld+json" is:inline set:html={`{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -1431,8 +1565,7 @@
       "inLanguage": "en-US"
     }
   ]
-}
-</script>
+}`} />
 
 </body>
 </html>

@@ -2,20 +2,30 @@
   "name": "skm-digital",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "SKM.digital marketing site - building cool sh*t for people doing good work",
   "scripts": {
-    "start": "serve . --listen tcp://0.0.0.0:${PORT:-3000} --no-clipboard --no-port-switching",
-    "dev": "serve . --listen tcp://0.0.0.0:3000 --no-clipboard",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "wrangler dev",
+    "deploy": "astro build && wrangler deploy",
+    "astro": "astro",
     "images": "node scripts/optimize-images.mjs",
     "meta": "node scripts/generate-meta-assets.mjs"
   },
   "dependencies": {
-    "serve": "^14.2.4"
+    "@astrojs/cloudflare": "^12.5.0",
+    "astro": "^5.7.0",
+    "resend": "^4.4.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5",
+    "typescript": "^5.6.0",
+    "wrangler": "^4.0.0"
   },
   "engines": {
     "node": ">=20"
-  },
-  "devDependencies": {
-    "sharp": "^0.34.5"
   }
 }

@@ -1,20 +1,21 @@
 /**
- * Generates static meta assets used by index.html:
+ * Generates static meta assets used by the site:
  *   - /og-image.png            (1200x630 social-share card)
  *   - /favicon.svg             (vector favicon)
  *   - /apple-touch-icon.png    (180x180 iOS home-screen icon)
  *   - /favicon-32x32.png       (legacy fallback)
  *   - /favicon-16x16.png       (legacy fallback)
  *
- * Uses Sharp + inline SVG. Fonts fall back to system serif/sans-serif so the
- * output is deterministic across machines (Fraunces is not bundled - the
- * site itself loads it via Google Fonts at runtime).
+ * Outputs to /public so Astro serves them at the site root. Uses Sharp + inline
+ * SVG. Fonts fall back to system serif/sans-serif so the output is deterministic
+ * across machines (Fraunces is not bundled - the site itself loads it via
+ * Google Fonts at runtime).
  */
 
 import sharp from 'sharp';
 import { writeFile } from 'node:fs/promises';
 
-const PROJECT_ROOT = new URL('../', import.meta.url).pathname.replace(/^\//, '');
+const PUBLIC_DIR = new URL('../public/', import.meta.url).pathname.replace(/^\//, '');
 
 // Brand tokens copied from index.html :root
 const PAPER = '#F0EAE0';
@@ -84,7 +85,7 @@ const ogSvg = `<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http
 
 await sharp(Buffer.from(ogSvg))
   .png({ compressionLevel: 9, palette: false })
-  .toFile(`${PROJECT_ROOT}og-image.png`);
+  .toFile(`${PUBLIC_DIR}og-image.png`);
 console.log('  og-image.png            generated (1200x630)');
 
 // ─────────────────────────────────────────────────────────
@@ -97,19 +98,19 @@ const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <circle cx="50" cy="48" r="5" fill="${ACCENT}"/>
 </svg>`;
 
-await writeFile(`${PROJECT_ROOT}favicon.svg`, faviconSvg);
+await writeFile(`${PUBLIC_DIR}favicon.svg`, faviconSvg);
 console.log('  favicon.svg             generated');
 
 // PNG rasterizations from the same SVG
 const faviconBuffer = Buffer.from(faviconSvg);
 
-await sharp(faviconBuffer).resize(180, 180).png().toFile(`${PROJECT_ROOT}apple-touch-icon.png`);
+await sharp(faviconBuffer).resize(180, 180).png().toFile(`${PUBLIC_DIR}apple-touch-icon.png`);
 console.log('  apple-touch-icon.png    generated (180x180)');
 
-await sharp(faviconBuffer).resize(32, 32).png().toFile(`${PROJECT_ROOT}favicon-32x32.png`);
+await sharp(faviconBuffer).resize(32, 32).png().toFile(`${PUBLIC_DIR}favicon-32x32.png`);
 console.log('  favicon-32x32.png       generated');
 
-await sharp(faviconBuffer).resize(16, 16).png().toFile(`${PROJECT_ROOT}favicon-16x16.png`);
+await sharp(faviconBuffer).resize(16, 16).png().toFile(`${PUBLIC_DIR}favicon-16x16.png`);
 console.log('  favicon-16x16.png       generated');
 
 console.log('\nDone.');

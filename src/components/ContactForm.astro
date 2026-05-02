@@ -1,0 +1,134 @@
+---
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<div class="contact-form-wrap">
+  <form id="contact-form" class="contact-form reveal" novalidate>
+    <div class="field-row">
+      <div class="field">
+        <label for="cf-name">Name <span class="req" aria-hidden="true">*</span></label>
+        <input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="120" />
+      </div>
+      <div class="field">
+        <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
+        <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="200" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="cf-project-type">Project type <span class="req" aria-hidden="true">*</span></label>
+      <select id="cf-project-type" name="project_type" required>
+        <option value="">— Choose one —</option>
+        <option value="wordpress">WordPress build</option>
+        <option value="salesforce">Salesforce integration</option>
+        <option value="custom">Custom tool / web app</option>
+        <option value="agency">Agency partnership / white-label</option>
+        <option value="other">Something else</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="cf-message">What are you trying to build? <span class="req" aria-hidden="true">*</span></label>
+      <textarea id="cf-message" name="message" required maxlength="5000" rows="5"></textarea>
+    </div>
+
+    {/* Honeypot — bots fill this, humans never see it */}
+    <div class="honey-pot" aria-hidden="true">
+      <label for="cf-website">Website (leave blank)</label>
+      <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    {siteKey && (
+      <div class="cf-turnstile-wrap">
+        <div class="cf-turnstile" data-sitekey={siteKey} data-theme="light" data-size="flexible"></div>
+      </div>
+    )}
+
+    <div class="form-actions">
+      <button type="submit" class="form-submit">
+        <span data-label>Send message</span>
+        <span class="arrow">→</span>
+      </button>
+      <p class="form-error-inline" data-error hidden></p>
+    </div>
+  </form>
+
+  <div class="form-status" data-form-status hidden></div>
+
+  <p class="form-fallback">
+    Or reach me directly at <strong>sean@skm.digital</strong>
+  </p>
+</div>
+
+{siteKey && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>
+)}
+
+<script is:inline>
+  (() => {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const submitBtn = form.querySelector('.form-submit');
+    const labelEl = form.querySelector('[data-label]');
+    const errorEl = form.querySelector('[data-error]');
+    const statusEl = document.querySelector('[data-form-status]');
+    const defaultLabel = labelEl ? labelEl.textContent : 'Send message';
+
+    function showError(msg) {
+      if (!errorEl) return;
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+    }
+    function clearError() {
+      if (!errorEl) return;
+      errorEl.hidden = true;
+      errorEl.textContent = '';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearError();
+
+      const data = new FormData(form);
+      const required = ['name', 'email', 'project_type', 'message'];
+      for (const key of required) {
+        const v = (data.get(key) || '').toString().trim();
+        if (!v) {
+          showError('Please fill in all required fields.');
+          return;
+        }
+      }
+
+      submitBtn.disabled = true;
+      if (labelEl) labelEl.textContent = 'Sending…';
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        const out = await res.json().catch(() => ({}));
+
+        if (!res.ok || !out.ok) {
+          throw new Error(out.error || 'Something went wrong. Please try again, or email me directly.');
+        }
+
+        form.hidden = true;
+        if (statusEl) {
+          statusEl.classList.add('success');
+          statusEl.textContent = "Got it. I'll get back to you within a day or two.";
+          statusEl.hidden = false;
+        }
+      } catch (err) {
+        showError((err && err.message) || 'Something went wrong. Please try again, or email me directly.');
+        submitBtn.disabled = false;
+        if (labelEl) labelEl.textContent = defaultLabel;
+        if (window.turnstile) {
+          try { window.turnstile.reset(); } catch (_) {}
+        }
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,8 @@
+# Local development secrets for `astro dev` (read by the Cloudflare adapter).
+# Copy to `.dev.vars` and fill in real values. Never commit `.dev.vars`.
+
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CONTACT_FROM_EMAIL="SKM.digital <contact@skm.digital>"
+CONTACT_TO_EMAIL=sean@skm.digital
+TURNSTILE_SECRET_KEY=0x4AAAAAAA_secret_key
+PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAAA_site_key
