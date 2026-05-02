@@ -7,61 +7,71 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAADH1M1M-jQ
 ---
 
 <div class="contact-form-wrap">
-  <form id="contact-form" class="contact-form reveal" novalidate>
-    <div class="field-row">
+  <div data-form-shell>
+    <form id="contact-form" class="contact-form reveal" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="cf-name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="120" />
+        </div>
+        <div class="field">
+          <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="200" />
+        </div>
+      </div>
+
       <div class="field">
-        <label for="cf-name">Name <span class="req" aria-hidden="true">*</span></label>
-        <input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="120" />
+        <label for="cf-project-type">Project type <span class="req" aria-hidden="true">*</span></label>
+        <select id="cf-project-type" name="project_type" required>
+          <option value="">— Choose one —</option>
+          <option value="wordpress">WordPress build</option>
+          <option value="salesforce">Salesforce integration</option>
+          <option value="custom">Custom tool / web app</option>
+          <option value="agency">Agency partnership / white-label</option>
+          <option value="other">Something else</option>
+        </select>
       </div>
+
       <div class="field">
-        <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
-        <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="200" />
+        <label for="cf-message">What are you trying to build? <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="cf-message" name="message" required maxlength="5000" rows="5"></textarea>
       </div>
-    </div>
 
-    <div class="field">
-      <label for="cf-project-type">Project type <span class="req" aria-hidden="true">*</span></label>
-      <select id="cf-project-type" name="project_type" required>
-        <option value="">— Choose one —</option>
-        <option value="wordpress">WordPress build</option>
-        <option value="salesforce">Salesforce integration</option>
-        <option value="custom">Custom tool / web app</option>
-        <option value="agency">Agency partnership / white-label</option>
-        <option value="other">Something else</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label for="cf-message">What are you trying to build? <span class="req" aria-hidden="true">*</span></label>
-      <textarea id="cf-message" name="message" required maxlength="5000" rows="5"></textarea>
-    </div>
-
-    {/* Honeypot — bots fill this, humans never see it */}
-    <div class="honey-pot" aria-hidden="true">
-      <label for="cf-website">Website (leave blank)</label>
-      <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-    </div>
-
-    {siteKey && (
-      <div class="cf-turnstile-wrap">
-        <div class="cf-turnstile" data-sitekey={siteKey} data-theme="light" data-size="flexible"></div>
+      {/* Honeypot — bots fill this, humans never see it */}
+      <div class="honey-pot" aria-hidden="true">
+        <label for="cf-website">Website (leave blank)</label>
+        <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
       </div>
-    )}
 
-    <div class="form-actions">
-      <button type="submit" class="form-submit">
-        <span data-label>Send message</span>
-        <span class="arrow">→</span>
-      </button>
-      <p class="form-error-inline" data-error hidden></p>
-    </div>
-  </form>
+      {siteKey && (
+        <div class="cf-turnstile-wrap">
+          <div class="cf-turnstile" data-sitekey={siteKey} data-theme="light" data-size="flexible"></div>
+        </div>
+      )}
 
-  <div class="form-status" data-form-status hidden></div>
+      <div class="form-actions">
+        <button type="submit" class="form-submit">
+          <span data-label>Send message</span>
+          <span class="arrow">→</span>
+        </button>
+        <p class="form-error-inline" data-error hidden></p>
+      </div>
+    </form>
 
-  <p class="form-fallback">
-    Or reach me directly at <strong>sean@skm.digital</strong>
-  </p>
+    <p class="form-fallback">
+      Or reach me directly at <strong>sean@skm.digital</strong>
+    </p>
+  </div>
+
+  <div class="form-status" data-form-status role="status" aria-live="polite" hidden>
+    <span class="form-status-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
+    <h3>Message <em>sent</em>.</h3>
+    <p>Got it — I'll read this and get back to you within a day or two.</p>
+  </div>
 </div>
 
 {siteKey && (
@@ -73,6 +83,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAADH1M1M-jQ
     const form = document.getElementById('contact-form');
     if (!form) return;
 
+    const formShell = document.querySelector('[data-form-shell]');
     const submitBtn = form.querySelector('.form-submit');
     const labelEl = form.querySelector('[data-label]');
     const errorEl = form.querySelector('[data-error]');
@@ -119,11 +130,11 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAADH1M1M-jQ
           throw new Error(out.error || 'Something went wrong. Please try again, or email me directly.');
         }
 
-        form.hidden = true;
+        if (formShell) formShell.hidden = true;
         if (statusEl) {
-          statusEl.classList.add('success');
-          statusEl.textContent = "Got it. I'll get back to you within a day or two.";
           statusEl.hidden = false;
+          // Pull the confirmation into view in case the user was scrolled mid-form
+          statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       } catch (err) {
         showError((err && err.message) || 'Something went wrong. Please try again, or email me directly.');

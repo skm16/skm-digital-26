@@ -70,6 +70,9 @@ import ContactForm from '../components/ContactForm.astro';
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  /* Defensive: keep the `hidden` HTML attribute working even when class
+     rules below set explicit `display` values. */
+  [hidden] { display: none !important; }
 
   body {
     background: var(--paper);
@@ -945,9 +948,6 @@ import ContactForm from '../components/ContactForm.astro';
     margin: 0 auto;
     text-align: left;
   }
-  .contact-form {
-    display: block;
-  }
   .field {
     margin-bottom: 1.5rem;
   }
@@ -1060,17 +1060,62 @@ import ContactForm from '../components/ContactForm.astro';
     margin: 0;
   }
 
+  /* ─────────── FORM SUCCESS STATE ─────────── */
   .form-status {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-    font-style: italic;
-    color: var(--ink);
     text-align: center;
-    padding: 3rem 0;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 1rem;
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    animation: form-status-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .form-status-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(58, 125, 76, 0.14);
+    border: 1px solid rgba(58, 125, 76, 0.35);
+    color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .form-status-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke-width: 2.4;
+    animation: form-status-check-in 0.55s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  }
+  .form-status h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 0.85rem;
+    font-variation-settings: "opsz" 100, "SOFT" 25;
+    line-height: 1.05;
+  }
+  .form-status h3 em {
+    font-style: italic;
+    color: var(--green);
+  }
+  .form-status p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    color: var(--ink-soft);
+    max-width: 38ch;
+    margin: 0 auto;
     line-height: 1.55;
   }
-  .form-status.success {
-    color: var(--green);
+  @keyframes form-status-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes form-status-check-in {
+    from { opacity: 0; transform: scale(0.6); }
+    to   { opacity: 1; transform: scale(1); }
   }
 
   .form-fallback {
